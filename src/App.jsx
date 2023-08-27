@@ -1,6 +1,7 @@
 import './App.css';
 
 import { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import ExpensesFilter from './components/ExpensesFilter';
 import ExpensesForm from './components/ExpensesForm';
@@ -18,11 +19,10 @@ function App() {
   }, []);
 
   const onSubmit = (data) => {
-    const newState = [...products, { ...data, id: products.length + 1 }];
+    const uniqueId = uuidv4();
+    const newState = [...products, { ...data, id: uniqueId }];
 
-    setProducts(newState);
-
-    localStorage.setItem('expenses', JSON.stringify(newState));
+    setProductsAndStorage(newState);
   };
 
   const handleSelectChange = (e) => {
@@ -30,7 +30,13 @@ function App() {
   };
 
   const onDelete = (productId) => {
-    setProducts(products.filter((p) => p.id !== productId));
+    const newState = products.filter((p) => p.id !== productId);
+    setProductsAndStorage(newState);
+  };
+
+  const setProductsAndStorage = (newState) => {
+    setProducts(newState);
+    localStorage.setItem('expenses', JSON.stringify(newState));
   };
 
   return (
