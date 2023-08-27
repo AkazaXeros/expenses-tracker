@@ -1,0 +1,22 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+section.expenses-list {
+  margin-top: 30px;
+}
+
+form.main-form {
+  margin-bottom: 30px;
+}
+
+label {
+  font-weight: bold;
+}

@@ -1,0 +1,14 @@
+#top-bar {
+  background-color: #0d6efd;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+#top-bar h1 {
+  font-size: 120%;
+  margin: 0 auto;
+  font-weight: bold;
+}

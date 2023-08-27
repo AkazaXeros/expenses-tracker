@@ -1,0 +1,16 @@
+header {
+  /* flex: 0 0 auto; */
+  padding: 10px;
+}
+
+#root > main {
+  flex: 1 1 auto;
+  padding: 10px;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+footer {
+  text-align: center;
+  font-weight: bold;
+}
