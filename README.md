@@ -13,7 +13,7 @@ Expense Tracker is a web application built using React, JavaScript, Vite, and Bo
 
 1. Clone the repository:
 
-git clone https://github.com/your-username/expense-tracker.git
+git clone https://github.com/AkazaXeros/expenses-tracker
 
 2. Navigate to the project directory.
 
