@@ -6,7 +6,10 @@ const ExpensesForm = ({ onSubmit }) => {
     handleSubmit,
     reset,
     formState: { errors, isValid },
-  } = useForm(); // Nested destructuring
+    watch
+  } = useForm({
+    mode: 'onChange'
+  }); // Nested destructuring
 
   return (
     <div className="mb-5">
@@ -22,19 +25,20 @@ const ExpensesForm = ({ onSubmit }) => {
             Description
           </label>
           <input
-            {...register('description', { required: true, minLength: 3 })}
+            {...register('description', { 
+              required: 'The description field is required.', 
+              minLength: {
+                value: 3,
+                message: 'The description must have at least 3 characters.'
+              } 
+            })}
             id="description"
             type="text"
             className="form-control"
           />
 
-          {errors.description?.type === 'required' && (
-            <p className="text-danger">The description field is required.</p>
-          )}
-          {errors.description?.type === 'minLength' && (
-            <p className="text-danger">
-              The description must have at least 3 characters.
-            </p>
+          {errors.description && (
+            <p className="text-danger">{errors.description.message}</p>
           )}
         </div>
 
@@ -43,16 +47,20 @@ const ExpensesForm = ({ onSubmit }) => {
             Amount
           </label>
           <input
-            {...register('amount', { required: true })}
+            {...register('amount', { required: 'The amount field is required.', valueAsNumber: true, 
+            validate: (value) => {
+              const isPositive = !isNaN(parseInt(value)) && parseInt(value) >= 0;
+              return isPositive ? true : "The amount field must be positive";
+            }
+            })}
             id="amount"
             type="number"
             min={0}
             step="any"
             className="form-control"
           />
-
-          {errors.amount?.type === 'required' && (
-            <p className="text-danger">The amount field is required.</p>
+          {errors.amount && (
+            <p className="text-danger">{errors.amount.message}</p>
           )}
         </div>
 
